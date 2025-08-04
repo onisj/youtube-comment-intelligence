@@ -1,0 +1,183 @@
+# =============================================================================
+# 🎬 YouTube Sentiment Analyzer - Environment Template
+# =============================================================================
+# Copy this file to .env and fill in your actual values
+# =============================================================================
+
+# =============================================================================
+# 📺 YouTube API Configuration
+# =============================================================================
+YOUTUBE_API_KEY=your_youtube_api_key_here
+
+# =============================================================================
+# 🌐 Flask Application Configuration
+# =============================================================================
+FLASK_PORT=8080
+FLASK_HOST=0.0.0.0
+FLASK_DEBUG=True
+FLASK_ENV=development
+
+# =============================================================================
+# 🔐 Security Configuration
+# =============================================================================
+SECRET_KEY=your_secret_key_here
+JWT_SECRET_KEY=your_jwt_secret_key_here
+REQUIRE_API_KEY=True
+RATE_LIMIT_ENABLED=True
+RATE_LIMIT_REQUESTS=100
+RATE_LIMIT_WINDOW=3600
+MAX_COMMENT_LENGTH=1000
+MAX_BATCH_SIZE=100
+PREDICTION_CONFIDENCE_THRESHOLD=0.6
+
+# =============================================================================
+# 📊 Machine Learning Configuration
+# =============================================================================
+MODEL_PATH=models/lgbm_model.pkl
+VECTORIZER_PATH=models/tfidf_vectorizer.pkl
+MODEL_CONFIDENCE_THRESHOLD=0.6
+MAX_PREDICTION_BATCH_SIZE=1000
+
+# =============================================================================
+# 📝 Logging Configuration
+# =============================================================================
+LOG_LEVEL=INFO
+LOG_FILE=logs/app.log
+LOG_FORMAT=%(asctime)s - %(name)s - %(levelname)s - %(message)s
+LOG_MAX_SIZE=10485760
+LOG_BACKUP_COUNT=5
+
+# =============================================================================
+# 🌍 CORS Configuration
+# =============================================================================
+CORS_ORIGINS=["http://localhost:3000", "http://localhost:8501", "http://127.0.0.1:8501"]
+CORS_METHODS=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+CORS_ALLOW_HEADERS=["Content-Type", "Authorization", "X-API-Key"]
+
+# =============================================================================
+# 📊 Streamlit Configuration
+# =============================================================================
+STREAMLIT_PORT=8501
+STREAMLIT_HOST=localhost
+STREAMLIT_DEBUG=True
+
+# =============================================================================
+# 🔍 Monitoring Configuration
+# =============================================================================
+ENABLE_METRICS=True
+METRICS_PORT=9090
+HEALTH_CHECK_ENABLED=True
+
+# =============================================================================
+# 🚀 Performance Configuration
+# =============================================================================
+WORKER_PROCESSES=1
+WORKER_THREADS=4
+REQUEST_TIMEOUT=30
+RESPONSE_TIMEOUT=30
+
+# =============================================================================
+# 🔧 Development Configuration
+# =============================================================================
+ENABLE_DEBUG_MODE=True
+ENABLE_TESTING_MODE=False
+ENABLE_PROFILING=False
+ENABLE_CACHING=True
+
+# =============================================================================
+# 📱 API Documentation Configuration
+# =============================================================================
+API_TITLE=YouTube Sentiment Analyzer API
+API_VERSION=1.0.0
+API_DESCRIPTION=Comprehensive API for YouTube comment sentiment analysis
+API_CONTACT_NAME=Your Name
+API_CONTACT_EMAIL=your.email@example.com
+
+# =============================================================================
+# 🛡️ Security Headers Configuration
+# =============================================================================
+SECURITY_HEADERS_ENABLED=True
+X_FRAME_OPTIONS=SAMEORIGIN
+X_CONTENT_TYPE_OPTIONS=nosniff
+X_XSS_PROTECTION=1; mode=block
+STRICT_TRANSPORT_SECURITY=max-age=31536000; includeSubDomains
+CONTENT_SECURITY_POLICY=default-src 'self'
+
+# =============================================================================
+# 🔄 Cache Configuration
+# =============================================================================
+CACHE_TYPE=simple
+CACHE_DEFAULT_TIMEOUT=300
+CACHE_KEY_PREFIX=youtube_sentiment_
+
+# =============================================================================
+# 📈 Rate Limiting Advanced Configuration
+# =============================================================================
+RATE_LIMIT_STORAGE_URL=memory://
+RATE_LIMIT_STRATEGY=fixed-window
+RATE_LIMIT_HEADERS_ENABLED=True
+RATE_LIMIT_HEADERS_RESET=True
+RATE_LIMIT_HEADERS_RETRY_AFTER=True
+
+# =============================================================================
+# 🎯 Model Performance Configuration
+# =============================================================================
+ENABLE_MODEL_CACHING=True
+MODEL_CACHE_TTL=3600
+ENABLE_BATCH_PROCESSING=True
+BATCH_SIZE=50
+ENABLE_PARALLEL_PROCESSING=False
+
+# =============================================================================
+# 📊 Visualization Configuration
+# =============================================================================
+CHART_THEME=plotly_white
+CHART_HEIGHT=400
+CHART_WIDTH=600
+ENABLE_INTERACTIVE_CHARTS=True
+
+# =============================================================================
+# 🔍 Input Validation Configuration
+# =============================================================================
+ENABLE_STRICT_VALIDATION=True
+ALLOW_HTML_IN_COMMENTS=False
+MAX_COMMENT_WORDS=200
+MIN_COMMENT_LENGTH=1
+ENABLE_PROFANITY_FILTER=False
+
+# =============================================================================
+# 📱 Mobile Configuration
+# =============================================================================
+MOBILE_OPTIMIZATION=True
+RESPONSIVE_DESIGN=True
+TOUCH_FRIENDLY=True
+
+# =============================================================================
+# 🔧 Maintenance Configuration
+# =============================================================================
+MAINTENANCE_MODE=False
+MAINTENANCE_MESSAGE=System is under maintenance. Please try again later.
+ENABLE_AUTO_RESTART=True
+RESTART_ON_ERROR=True
+
+# =============================================================================
+# 📊 Error Reporting Configuration
+# =============================================================================
+ENABLE_ERROR_REPORTING=True
+ERROR_REPORTING_LEVEL=ERROR
+ENABLE_STACK_TRACES=True
+HIDE_SENSITIVE_DATA=True
+
+# =============================================================================
+# 🎯 Feature Flags
+# =============================================================================
+ENABLE_ADVANCED_ANALYTICS=True
+ENABLE_SENTIMENT_TRENDS=True
+ENABLE_WORD_CLOUD=True
+ENABLE_COMMENT_FILTERING=True
+ENABLE_BATCH_ANALYSIS=True
+ENABLE_REAL_TIME_PROCESSING=True
+
+# =============================================================================
+# 📝 End of Configuration
+# ============================================================================= 
