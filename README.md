@@ -1,4 +1,4 @@
-# 🎬 YouTube Comment intelligence
+# 🎬 YouTube Comment Intelligence
 
 A comprehensive machine learning pipeline for analyzing sentiment in YouTube comments using advanced NLP techniques and LightGBM classification.
 
