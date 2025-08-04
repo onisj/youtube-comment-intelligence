@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: youtube-comment-intelligence
+  labels:
+    name: youtube-comment-intelligence
+    app: youtube-comment-intelligence 

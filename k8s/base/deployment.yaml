@@ -1,0 +1,152 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: youtube-comment-intelligence-api
+  namespace: youtube-comment-intelligence
+  labels:
+    app: youtube-comment-intelligence-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: youtube-comment-intelligence-api
+  template:
+    metadata:
+      labels:
+        app: youtube-comment-intelligence-api
+    spec:
+      containers:
+      - name: api
+        image: youtube-comment-intelligence:latest
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: youtube-comment-intelligence-config
+        env:
+        - name: YOUTUBE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: youtube-comment-intelligence-secrets
+              key: YOUTUBE_API_KEY
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: youtube-comment-intelligence-secrets
+              key: SECRET_KEY
+        - name: JWT_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: youtube-comment-intelligence-secrets
+              key: JWT_SECRET_KEY
+        - name: REDIS_URL
+          value: "redis://youtube-comment-intelligence-redis:6379/0"
+        - name: DATABASE_URL
+          value: "postgresql://youtube_user:$(DB_PASSWORD)@youtube-comment-intelligence-postgres:5432/youtube_intelligence"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: youtube-comment-intelligence-secrets
+              key: DB_PASSWORD
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        volumeMounts:
+        - name: models
+          mountPath: /app/models
+          readOnly: true
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: models
+        persistentVolumeClaim:
+          claimName: youtube-comment-intelligence-models
+      - name: logs
+        emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: youtube-comment-intelligence-web
+  namespace: youtube-comment-intelligence
+  labels:
+    app: youtube-comment-intelligence-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: youtube-comment-intelligence-web
+  template:
+    metadata:
+      labels:
+        app: youtube-comment-intelligence-web
+    spec:
+      containers:
+      - name: web
+        image: youtube-comment-intelligence-streamlit:latest
+        ports:
+        - containerPort: 8501
+        envFrom:
+        - configMapRef:
+            name: youtube-comment-intelligence-config
+        env:
+        - name: YOUTUBE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: youtube-comment-intelligence-secrets
+              key: YOUTUBE_API_KEY
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8501
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8501
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        volumeMounts:
+        - name: models
+          mountPath: /app/models
+          readOnly: true
+        - name: assets
+          mountPath: /app/assets
+      volumes:
+      - name: models
+        persistentVolumeClaim:
+          claimName: youtube-comment-intelligence-models
+      - name: assets
+        emptyDir: {} 

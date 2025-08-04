@@ -1,0 +1,37 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/youtube-intelligence/*.log
+  fields:
+    service: youtube-comment-intelligence
+  fields_under_root: true
+  multiline.pattern: '^\['
+  multiline.negate: true
+  multiline.match: after
+
+- type: container
+  paths:
+    - '/var/lib/docker/containers/*/*.log'
+  processors:
+    - add_docker_metadata:
+        host: "unix:///var/run/docker.sock"
+
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_cloud_metadata: ~
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  indices:
+    - index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+setup.kibana:
+  host: "kibana:5601"
+
+setup.dashboards.enabled: true
+setup.template.enabled: true
+setup.template.name: "filebeat"
+setup.template.pattern: "filebeat-*"
+setup.template.overwrite: true 
