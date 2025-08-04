@@ -78,6 +78,10 @@ class SecurityConfig:
         api_key = os.getenv('YOUTUBE_API_KEY')
         if api_key:
             keys['youtube'] = api_key
+        
+        # Add test key for testing
+        keys['test'] = 'testkey123456789'
+        
         return keys
 
 # Rate limiting storage

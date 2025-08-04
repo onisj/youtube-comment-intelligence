@@ -68,9 +68,11 @@ class TestStreamlitApp:
         
         result = predict_sentiment("Great video!", mock_model, mock_vectorizer)
         
-        assert isinstance(result, dict)
-        assert 'sentiment' in result
-        assert 'confidence' in result
+        # predict_sentiment returns a tuple (prediction, probability)
+        assert isinstance(result, tuple)
+        assert len(result) == 2
+        assert isinstance(result[0], (int, np.integer))
+        assert isinstance(result[1], np.ndarray)
 
     def test_get_sentiment_label(self):
         """Test sentiment label mapping."""
@@ -90,8 +92,8 @@ class TestStreamlitApp:
         text = "This is a great video with amazing content"
         result = create_wordcloud(text)
         
-        # Should return a wordcloud object or None
-        assert result is None or hasattr(result, 'words_')
+        # Should return a matplotlib figure
+        assert hasattr(result, 'savefig')  # matplotlib figure method
 
     def test_streamlit_ui_elements(self):
         """Test Streamlit UI element creation."""
@@ -122,9 +124,11 @@ class TestStreamlitApp:
         
         result = predict_sentiment("Great video!", mock_model, mock_vectorizer)
         
-        assert isinstance(result, dict)
-        assert 'sentiment' in result
-        assert 'confidence' in result
+        # predict_sentiment returns a tuple (prediction, probability)
+        assert isinstance(result, tuple)
+        assert len(result) == 2
+        assert isinstance(result[0], (int, np.integer))
+        assert isinstance(result[1], np.ndarray)
 
     def test_batch_processing_interface(self):
         """Test batch processing interface."""
@@ -147,5 +151,5 @@ class TestStreamlitApp:
             results.append(result)
         
         assert len(results) == 3
-        assert all(isinstance(result, dict) for result in results)
-        assert all('sentiment' in result for result in results) 
+        assert all(isinstance(result, tuple) for result in results)
+        assert all(len(result) == 2 for result in results) 

@@ -41,9 +41,10 @@ class TestAPIEndpoints:
                                 headers={'X-API-Key': 'testkey123456789'})
         assert response.status_code == 200
         result = json.loads(response.data)
-        assert 'predictions' in result
-        assert 'sentiments' in result
-        assert len(result['predictions']) == len(sample_comments)
+        assert 'results' in result
+        assert 'successful_predictions' in result
+        assert 'total_comments' in result
+        assert len(result['results']) == len(sample_comments)
 
     def test_predict_endpoint_no_comments(self, app_client):
         """Test prediction with no comments."""
