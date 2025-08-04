@@ -32,7 +32,9 @@ MANIFEST
 *.manifest
 *.spec
 
+# Chrome extension
 yt-chrome-plugin-frontend/
+improvements.md
 
 # Installer logs
 pip-log.txt
