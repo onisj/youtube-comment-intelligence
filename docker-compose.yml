@@ -1,0 +1,145 @@
+version: '3.8'
+
+services:
+  # Main application
+  youtube-sentiment-app:
+    build: .
+    container_name: youtube-sentiment-app
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      - PYTHONPATH=/app
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    depends_on:
+      - mlflow
+      - postgres
+    networks:
+      - mlops-network
+
+  # MLflow Tracking Server
+  mlflow:
+    image: python:3.9-slim
+    container_name: mlflow-server
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./mlruns:/mlruns
+      - ./artifacts:/artifacts
+    environment:
+      - MLFLOW_BACKEND_STORE_URI=postgresql://mlflow:mlflow@postgres:5432/mlflow
+      - MLFLOW_DEFAULT_ARTIFACT_ROOT=/artifacts
+    command: >
+      bash -c "pip install mlflow psycopg2-binary &&
+               mlflow server 
+               --backend-store-uri postgresql://mlflow:mlflow@postgres:5432/mlflow 
+               --default-artifact-root /artifacts 
+               --host 0.0.0.0 
+               --port 5000"
+    depends_on:
+      - postgres
+    networks:
+      - mlops-network
+
+  # PostgreSQL for MLflow backend
+  postgres:
+    image: postgres:13
+    container_name: mlflow-postgres
+    environment:
+      - POSTGRES_DB=mlflow
+      - POSTGRES_USER=mlflow
+      - POSTGRES_PASSWORD=mlflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - mlops-network
+
+  # Jupyter Lab for development
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile.jupyter
+    container_name: jupyter-lab
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/workspace
+      - ./data:/workspace/data
+      - ./notebooks:/workspace/notebooks
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=youtube-sentiment
+    command: >
+      bash -c "pip install -r requirements.txt &&
+               jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root 
+               --NotebookApp.token='youtube-sentiment' --NotebookApp.password=''"
+    networks:
+      - mlops-network
+
+  # Streamlit for model demo
+  streamlit:
+    build: .
+    container_name: streamlit-demo
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+      - ./models:/app/models
+    environment:
+      - PYTHONPATH=/app
+    command: >
+      bash -c "pip install streamlit &&
+               streamlit run streamlit_app.py --server.port=8501 --server.address=0.0.0.0"
+    depends_on:
+      - youtube-sentiment-app
+    networks:
+      - mlops-network
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - mlops-network
+
+  # Monitoring with Prometheus (optional)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - mlops-network
+
+  # Grafana for visualization (optional)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - mlops-network
+
+volumes:
+  postgres_data:
+  redis_data:
+  grafana_data:
+
+networks:
+  mlops-network:
+    driver: bridge
