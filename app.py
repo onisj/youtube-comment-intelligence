@@ -82,6 +82,10 @@ class SecurityConfig:
         # Add test key for testing
         keys['test'] = 'testkey123456789'
         
+        # Add the YouTube API key as a valid authentication key
+        if api_key:
+            keys['auth'] = api_key
+        
         return keys
 
 # Rate limiting storage
@@ -159,8 +163,9 @@ class InputValidator:
         if not api_key:
             return False
         
-        # Basic validation - you can add more sophisticated checks
-        return len(api_key) >= 10 and api_key.isalnum()
+        # Basic validation - allow alphanumeric, underscores, and hyphens
+        # YouTube API keys contain these characters
+        return len(api_key) >= 10 and all(c.isalnum() or c in '_-' for c in api_key)
 
 # Authentication decorator
 def require_api_key(f):

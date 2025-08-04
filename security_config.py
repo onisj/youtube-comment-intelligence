@@ -102,8 +102,9 @@ class InputValidator:
         if not api_key:
             return False
         
-        # Basic validation - at least 10 characters, alphanumeric
-        return len(api_key) >= 10 and api_key.isalnum()
+        # Basic validation - allow alphanumeric, underscores, and hyphens
+        # YouTube API keys contain these characters
+        return len(api_key) >= 10 and all(c.isalnum() or c in '_-' for c in api_key)
 
 class RateLimiter:
     """Rate limiting implementation."""
