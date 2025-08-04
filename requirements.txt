@@ -1,4 +1,4 @@
-# YouTube Sentiment Analysis - Complete Requirements
+# YouTube Comment Intelligence - Complete Requirements
 # ================================================
 
 # Core Application Dependencies

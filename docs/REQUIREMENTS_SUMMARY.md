@@ -4,7 +4,7 @@ Comprehensive guide to all project dependencies, their purposes, and installatio
 
 ## 📋 Overview
 
-This project uses a carefully curated set of Python packages to provide a complete machine learning pipeline for YouTube sentiment analysis. The dependencies are organized into logical categories for easy management and deployment.
+This project uses a carefully curated set of Python packages to provide a complete machine learning pipeline for YouTube comment intelligence. The dependencies are organized into logical categories for easy management and deployment.
 
 ## 🎯 Dependency Categories
 

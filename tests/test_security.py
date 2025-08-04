@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
 """
-Security Tests for YouTube Sentiment Analyzer
+Security Tests for YouTube Comment Intelligence
 """
 
 import pytest

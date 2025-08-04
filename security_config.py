@@ -1,5 +1,5 @@
 """
-Security Configuration for YouTube Sentiment Analyzer
+Security Configuration for YouTube Comment Intelligence
 """
 
 import os

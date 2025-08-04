@@ -246,7 +246,7 @@ class TestStreamlitApp:
         # This would typically be tested by checking if the config is set correctly
         # In a real test, you'd check the Streamlit session state
         expected_config = {
-            "page_title": "YouTube Sentiment Analysis",
+            "page_title": "YouTube Comment Intelligence",
             "page_icon": "🎬",
             "layout": "wide",
             "initial_sidebar_state": "expanded"

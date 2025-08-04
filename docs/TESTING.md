@@ -1,6 +1,6 @@
 # 🧪 Comprehensive Testing Guide
 
-Complete testing strategy and implementation for the YouTube Sentiment Analysis project.
+Complete testing strategy and implementation for the YouTube Comment Intelligence project.
 
 ## 📋 Overview
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple startup script for YouTube Sentiment Analyzer
+Simple startup script for YouTube Comment Intelligence
 Loads from .env and starts both applications
 """
 
@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 def main():
     """Start both Flask API and Streamlit UI."""
-    print("🎬 YouTube Sentiment Analyzer")
+    print("🎬 YouTube Comment Intelligence")
     print("=" * 40)
     
     # Load environment variables

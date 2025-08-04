@@ -1,4 +1,4 @@
-# 🎬 YouTube Sentiment Analysis - Project Overview
+# 🎬 YouTube Comment Intelligence - Project Overview
 
 A comprehensive machine learning pipeline for analyzing sentiment in YouTube comments using advanced NLP techniques and LightGBM classification.
 

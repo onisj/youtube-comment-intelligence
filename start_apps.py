@@ -59,7 +59,7 @@ def test_streamlit():
     return False
 
 def main():
-    print("🎬 YouTube Sentiment Analysis - Application Starter")
+    print("🎬 YouTube Comment Intelligence - Application Starter")
     print("=" * 50)
     
     # Start Flask API

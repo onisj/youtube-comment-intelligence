@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate secure secret keys for the YouTube Sentiment Analyzer
+Generate secure secret keys for the YouTube Comment Intelligence
 """
 import secrets
 import string

@@ -723,7 +723,7 @@ def generate_trend_graph():
 def api_docs():
     """API documentation endpoint."""
     return jsonify({
-        'title': 'YouTube Sentiment Analyzer API',
+        'title': 'YouTube Comment Intelligence API',
         'version': '1.0.0',
         'description': 'Secure API for YouTube comment sentiment analysis',
         'endpoints': {
@@ -788,7 +788,7 @@ if __name__ == '__main__':
     host = os.getenv('FLASK_HOST', '0.0.0.0')
     debug = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
     
-    logger.info(f"Starting YouTube Sentiment Analyzer API on {host}:{port}")
+    logger.info(f"Starting YouTube Comment Intelligence API on {host}:{port}")
     logger.info("Security features enabled: Authentication, Rate Limiting, Input Validation")
     
     app.run(host=host, port=port, debug=debug)

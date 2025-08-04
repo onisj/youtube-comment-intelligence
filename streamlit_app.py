@@ -27,7 +27,7 @@ except LookupError:
 
 # Page configuration
 st.set_page_config(
-    page_title="YouTube Sentiment Analysis",
+    page_title="YouTube Comment Intelligence",
     page_icon="🎬",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -143,7 +143,7 @@ def create_wordcloud(text):
 
 def main():
     # Header
-    st.markdown('<h1 class="main-header">🎬 YouTube Sentiment Analysis</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">🎬 YouTube Comment Intelligence</h1>', unsafe_allow_html=True)
     st.markdown('<p class="sub-header">Analyze sentiment of YouTube comments and text using Machine Learning</p>', unsafe_allow_html=True)
     
     # Load models

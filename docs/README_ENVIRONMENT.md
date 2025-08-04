@@ -1,6 +1,6 @@
 # 🛠️ Environment Setup Guide
 
-Complete guide for setting up the YouTube Sentiment Analysis development environment.
+Complete guide for setting up the YouTube Comment Intelligence development environment.
 
 ## 📋 Prerequisites
 

@@ -1,10 +1,10 @@
-# YouTube Sentiment Analysis MLOps Project Makefile
+# YouTube Comment Intelligence MLOps Project Makefile
 
 .PHONY: help setup install install-dev clean test lint format docker-build docker-up docker-down jupyter mlflow dvc-repro streamlit
 
 # Default target
 help:
-	@echo "YouTube Sentiment Analysis MLOps Project"
+	@echo "YouTube Comment Intelligence MLOps Project"
 	@echo "========================================"
 	@echo "Available commands:"
 	@echo "  setup          - Set up the development environment"

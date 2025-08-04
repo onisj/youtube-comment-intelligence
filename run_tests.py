@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Comprehensive test runner for YouTube Sentiment Analysis project.
+Comprehensive test runner for YouTube Comment Intelligence project.
 """
 
 import subprocess
@@ -130,7 +130,7 @@ def generate_report():
     print(f"📄 Test report generated: {report_file}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Test runner for YouTube Sentiment Analysis")
+    parser = argparse.ArgumentParser(description="Test runner for YouTube Comment Intelligence")
     parser.add_argument("--type", default="all", 
                        choices=["all", "unit", "api", "model", "preprocessing", "streamlit", "fast", "coverage", "parallel"],
                        help="Type of tests to run")
@@ -141,7 +141,7 @@ def main():
     
     args = parser.parse_args()
     
-    print("🧪 YouTube Sentiment Analysis Test Runner")
+    print("🧪 YouTube Comment Intelligence Test Runner")
     print("=" * 50)
     
     if args.setup:
