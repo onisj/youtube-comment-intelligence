@@ -48,9 +48,9 @@ class TestPreprocessing:
         assert "!" not in result
         assert "." not in result
         
-        # Should contain the main words
+        # Should contain the main words (lemmatized)
         assert "video" in result
-        assert "stars" in result
+        assert "star" in result  # lemmatized from 'stars'
         assert "amazing" in result
 
     def test_special_characters(self):
